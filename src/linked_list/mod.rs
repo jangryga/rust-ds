@@ -36,4 +36,19 @@ impl LinkedList {
 
         *curr = Some(new_node);
     }
+
+    pub fn reverse(&mut self) {
+        let mut prev: Option<Box<Node>> = None;
+        let mut curr: Option<Box<Node>> = self.head.take();
+    
+        while let Some(mut boxed_node) = curr {
+            let temp: Option<Box<Node>> = boxed_node.next.take();
+
+            boxed_node.next = prev;
+            prev = Some(boxed_node);
+            curr = temp;
+        }
+    
+        self.head = prev;
+    }
 }

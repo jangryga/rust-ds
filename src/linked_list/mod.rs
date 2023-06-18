@@ -52,3 +52,24 @@ impl LinkedList {
         self.head = prev;
     }
 }
+
+#[macro_export]
+macro_rules! linked_list {
+    () => (
+        $crate::linked_list::LinkedList::new();
+    );
+    ( [ $( $x:expr),* ] ) => {
+        {
+            let mut temp_list = $crate::linked_list::LinkedList::new();
+            $(
+                temp_list.add($x);
+            )*
+            temp_list
+        }
+    }
+}
+
+
+pub fn merge_sorted_lists(l1: LinkedList, l2: LinkedList) -> LinkedList {
+    todo!()
+}

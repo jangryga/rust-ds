@@ -1,7 +1,9 @@
 pub mod linked_list;
+pub mod binary_tree;
 
 #[cfg(test)]
 mod tests {
+    use crate::binary_tree::TreeNode;
     use crate::linked_list::LinkedList;
     use crate::linked_list; 
 
@@ -23,5 +25,11 @@ mod tests {
         ls1.add(1);
         assert_eq!(ls1, ls2);
         assert_eq!(ls1, ls3);
+    }
+
+    #[test]
+    fn create_binary_tree() {
+        let tree = TreeNode::new(2);
+        assert!(true);
     }
 }

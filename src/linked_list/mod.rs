@@ -1,4 +1,4 @@
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub struct Node {
     val: i32,
     next: Option<Box<Node>>
@@ -13,7 +13,7 @@ impl Node {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub struct LinkedList {
     head: Option<Box<Node>>
 }
@@ -66,7 +66,14 @@ macro_rules! linked_list {
             )*
             temp_list
         }
-    }
+    };
+    (  $x:expr ) => {
+        {
+            let mut temp_list = $crate::linked_list::LinkedList::new();
+            temp_list.add($x);
+            temp_list
+        }
+    };
 }
 
 

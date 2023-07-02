@@ -70,6 +70,23 @@ macro_rules! linked_list {
 }
 
 
-pub fn merge_sorted_lists(l1: LinkedList, l2: LinkedList) -> LinkedList {
-    todo!()
+pub fn merge_sorted_lists(mut ls1: LinkedList, mut ls2: LinkedList) -> LinkedList {
+    let mut dummy_head = Box::new(Node::new(0));
+    let mut tail = &mut dummy_head;
+
+    while let (Some(mut node1), Some(mut node2)) = (ls1.head.take(), ls2.head.take()) {
+        if node1.val > node2.val {
+            ls1.head = node1.next.take();
+            tail.next = Some(node1);
+        } else {
+            ls2.head = node2.next.take();
+            tail.next = Some(node2);
+        }
+
+        tail = tail.next.as_mut().unwrap();
+    }
+
+    tail.next = if ls1.head.is_some() { ls1.head } else { ls2.head };
+    
+    LinkedList { head: dummy_head.next }
 }
